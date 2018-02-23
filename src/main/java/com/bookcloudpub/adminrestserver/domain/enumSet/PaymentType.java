@@ -1,12 +1,12 @@
 package com.bookcloudpub.adminrestserver.domain.enumSet;
 
 public enum PaymentType {
-    RECEIPT("영수", 1), CHARGE("청구", 2);
+    RECEIPT("영수"), CHARGE("청구");
     private String name;
-    private int typeNumber;
-    PaymentType(String name, int typeNumber) {
+    private final int typeNumber;
+    PaymentType(String name) {
         this.name = name;
-        this.typeNumber = typeNumber;
+        this.typeNumber = this.ordinal() + 1;
     }
 
     public int getTypeNumber() {
@@ -17,5 +17,4 @@ public enum PaymentType {
     public String toString() {
         return this.name;
     }
-
 }
