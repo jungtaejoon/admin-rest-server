@@ -8,8 +8,8 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
 import java.util.Date;
 
-@Data
 @Entity
+@Data
 public class Bookstore {
     @Id
     @SequenceGenerator(name = "bookstore_id_seq", sequenceName = "bookstore_id_seq", allocationSize = 1)
