@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -17,12 +19,9 @@ import static org.junit.Assert.*;
 import static org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace.NONE;
 
 @RunWith(SpringRunner.class)
-@DataJpaTest
-@AutoConfigureTestDatabase(replace = NONE)
+@SpringBootTest
+@Transactional
 public class BookstoreRepositoryTest {
-
-    @Autowired
-    private TestEntityManager testEntityManager;
 
     @Autowired
     private BookstoreRepository bookstoreRepository;
@@ -37,19 +36,17 @@ public class BookstoreRepositoryTest {
         bookstore.setPaymentType(PaymentType.CHARGE);
         bookstore.setSalesRate(0.65f);
         bookstore.setCreateTime(new Timestamp(System.currentTimeMillis()));
-        testEntityManager.persist(bookstore);
-        testEntityManager.flush();
+        bookstoreRepository.save(bookstore);
 
         Bookstore bookstore1 = new Bookstore();
-        bookstore.setName("（주）인터파크");
-        bookstore.setAddress("서울특별시 강남구 삼성로 512");
-        bookstore.setEmail("yuya00@interparklogis.com");
-        bookstore.setPresidentName("이상규");
-        bookstore.setPaymentType(PaymentType.CHARGE);
-        bookstore.setSalesRate(0.6f);
-        bookstore.setCreateTime(new Timestamp(System.currentTimeMillis()));
-        testEntityManager.persist(bookstore1);
-        testEntityManager.flush();
+        bookstore1.setName("（주）인터파크");
+        bookstore1.setAddress("서울특별시 강남구 삼성로 512");
+        bookstore1.setEmail("yuya00@interparklogis.com");
+        bookstore1.setPresidentName("이상규");
+        bookstore1.setPaymentType(PaymentType.CHARGE);
+        bookstore1.setSalesRate(0.6f);
+        bookstore1.setCreateTime(new Timestamp(System.currentTimeMillis()));
+        bookstoreRepository.save(bookstore1);
 
         //when
         List<Bookstore> list = bookstoreRepository.findAll();

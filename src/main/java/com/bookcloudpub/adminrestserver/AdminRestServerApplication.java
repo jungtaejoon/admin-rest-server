@@ -2,6 +2,7 @@ package com.bookcloudpub.adminrestserver;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -19,6 +20,7 @@ import static springfox.documentation.builders.PathSelectors.regex;
 @SpringBootApplication
 @Import({springfox.documentation.spring.data.rest.configuration.SpringDataRestConfiguration.class})
 @EnableSwagger2
+@EnableOAuth2Sso
 public class AdminRestServerApplication {
 
 	public static void main(String[] args) {
@@ -39,6 +41,7 @@ public class AdminRestServerApplication {
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
+
 	private ApiInfo apiInfo() {
 		return new ApiInfoBuilder()
 				.title("책구름 Admin REST Server")
