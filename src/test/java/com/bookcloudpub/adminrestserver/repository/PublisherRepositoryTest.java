@@ -43,4 +43,20 @@ public class PublisherRepositoryTest {
         assertNotNull(publisher.getLastModifiedTime());
         assertEquals(publisher, savedPublisher);
     }
+
+    @Test
+    public void 출판사_하나_가져오기() {
+        Publisher publisher = getTestPublisher();
+        Publisher savedPublisher = publisherRepository.save(publisher);
+
+        //when
+        Publisher found = publisherRepository.findOne(savedPublisher.getId());
+
+        //then
+        assertNotNull(found);
+        assertEquals(savedPublisher, found);
+        assertEquals("3539200480", found.getCorporateNumber());
+        assertNotNull(publisher.getCreatedTime());
+        assertNotNull(publisher.getLastModifiedTime());
+    }
 }
