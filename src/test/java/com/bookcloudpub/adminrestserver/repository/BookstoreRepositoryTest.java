@@ -5,9 +5,6 @@ import com.bookcloudpub.adminrestserver.domain.enumSet.PaymentType;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,8 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.sql.Timestamp;
 import java.util.List;
 
-import static org.junit.Assert.*;
-import static org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace.NONE;
+import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -26,8 +22,7 @@ public class BookstoreRepositoryTest {
     @Autowired
     private BookstoreRepository bookstoreRepository;
 
-    @Test
-    public void 서점_데이터_전체_불러오기() {
+    private Bookstore getTestBookstore() {
         Bookstore bookstore = new Bookstore();
         bookstore.setName("교보문고");
         bookstore.setAddress("서울특별시 종로구 종로 1 (종로1가,교보빌딩)");
@@ -35,7 +30,13 @@ public class BookstoreRepositoryTest {
         bookstore.setPresidentName("허정도");
         bookstore.setPaymentType(PaymentType.CHARGE);
         bookstore.setSalesRate(0.65f);
-        bookstore.setCreateTime(new Timestamp(System.currentTimeMillis()));
+        bookstore.setCreatedTime(new Timestamp(System.currentTimeMillis()));
+        return bookstore;
+    }
+
+    @Test
+    public void 서점_데이터_전체_불러오기() {
+        Bookstore bookstore = getTestBookstore();
         bookstoreRepository.save(bookstore);
 
         Bookstore bookstore1 = new Bookstore();
@@ -45,7 +46,7 @@ public class BookstoreRepositoryTest {
         bookstore1.setPresidentName("이상규");
         bookstore1.setPaymentType(PaymentType.CHARGE);
         bookstore1.setSalesRate(0.6f);
-        bookstore1.setCreateTime(new Timestamp(System.currentTimeMillis()));
+        bookstore1.setCreatedTime(new Timestamp(System.currentTimeMillis()));
         bookstoreRepository.save(bookstore1);
 
         //when
@@ -56,7 +57,5 @@ public class BookstoreRepositoryTest {
         assertEquals(list.get(0), bookstore);
         assertEquals(list.get(1), bookstore1);
     }
-
-
 
 }
