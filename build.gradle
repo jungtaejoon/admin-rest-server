@@ -24,13 +24,6 @@ repositories {
 }
 
 test {
-	sourceSets {
-		main {
-			java {
-				srcDir 'test'
-			}
-		}
-	}
 }
 
 
