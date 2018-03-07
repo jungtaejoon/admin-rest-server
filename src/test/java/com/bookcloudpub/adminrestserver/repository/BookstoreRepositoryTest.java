@@ -5,6 +5,7 @@ import com.bookcloudpub.adminrestserver.domain.enumSet.PaymentType;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,8 +16,7 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest
-@Transactional
+@DataJpaTest
 public class BookstoreRepositoryTest {
 
     @Autowired
@@ -26,6 +26,7 @@ public class BookstoreRepositoryTest {
         Bookstore bookstore = new Bookstore();
         bookstore.setName("교보문고");
         bookstore.setAddress("서울특별시 종로구 종로 1 (종로1가,교보빌딩)");
+        bookstore.setCorporateNumber("1028111670");
         bookstore.setEmail("11670@kyobobook.co.kr");
         bookstore.setPresidentName("허정도");
         bookstore.setPaymentType(PaymentType.CHARGE);
@@ -42,6 +43,7 @@ public class BookstoreRepositoryTest {
         Bookstore bookstore1 = new Bookstore();
         bookstore1.setName("（주）인터파크");
         bookstore1.setAddress("서울특별시 강남구 삼성로 512");
+        bookstore1.setCorporateNumber("2148798889");
         bookstore1.setEmail("yuya00@interparklogis.com");
         bookstore1.setPresidentName("이상규");
         bookstore1.setPaymentType(PaymentType.CHARGE);

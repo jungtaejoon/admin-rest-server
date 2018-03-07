@@ -25,24 +25,24 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 import static springfox.documentation.builders.PathSelectors.regex;
 
 @SpringBootApplication
-@Import({springfox.documentation.spring.data.rest.configuration.SpringDataRestConfiguration.class})
-@EnableSwagger2
+//@Import({springfox.documentation.spring.data.rest.configuration.SpringDataRestConfiguration.class})
+//@EnableSwagger2
 @EnableResourceServer
 public class AdminRestServerApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(AdminRestServerApplication.class, args);
 	}
-
-	@Bean
-	public Docket newsApi() {
-		return new Docket(DocumentationType.SWAGGER_2)
-				.groupName("bookcloudpub")
-				.apiInfo(apiInfo())
-				.select()
-				.paths(PathSelectors.ant("/**"))
-				.build();
-	}
+//
+//	@Bean
+//	public Docket newsApi() {
+//		return new Docket(DocumentationType.SWAGGER_2)
+//				.groupName("bookcloudpub")
+//				.apiInfo(apiInfo())
+//				.select()
+//				.paths(PathSelectors.ant("/**"))
+//				.build();
+//	}
 
 	@Bean
 	public PasswordEncoder passwordEncoder() {
