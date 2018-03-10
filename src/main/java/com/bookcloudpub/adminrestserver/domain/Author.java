@@ -26,4 +26,11 @@ public class Author {
     public Author(String penName) {
         this.penName = penName;
     }
+
+    public void setBookcloudpubAccount(User user) {
+        this.bookcloudpubAccount = user;
+        if(this.bookcloudpubAccount.getAuthorData() == null) {
+            this.bookcloudpubAccount.setAuthorData(this);
+        }
+    }
 }

@@ -43,30 +43,30 @@ public class UserRepositoryTest {
 
         //then
         assertEquals(user, savedUser);
-        assertNotNull(savedUser.getId());
+        assertNotNull(savedUser.getEmail());
     }
 
     @Test
     public void 유저_저장_위드_필명() {
         User user = getTestUser();
+        User savedUser = userRepository.save(user);
         Author author = authorRepository.save(new Author("오키더키"));
-        user.setAuthorData(author);
 
         //when
-        User savedUser = userRepository.save(user);
+        author.setBookcloudpubAccount(savedUser);
 
         //then
         assertEquals(user, savedUser);
-        assertNotNull(savedUser.getId());
-        assertEquals(savedUser.getAuthorData(), author);
+        assertNotNull(savedUser.getEmail());
+        assertEquals(author, savedUser.getAuthorData());
     }
 
     @Test
     public void 유저리스트_가져오기() {
         User user = getTestUser();
+        User savedUser = userRepository.save(user);
         Author author = authorRepository.save(new Author("오키더키"));
-        user.setAuthorData(author);
-        userRepository.save(user);
+        author.setBookcloudpubAccount(savedUser);
 
         User user1 = getTestUser();
         user1.setEmail("jungtaejoon@daum.net");
@@ -84,12 +84,12 @@ public class UserRepositoryTest {
     @Test
     public void 아이디로_가져오기() {
         User user = getTestUser();
-        Author author = authorRepository.save(new Author("오키더키"));
-        user.setAuthorData(author);
         User savedUser = userRepository.save(user);
+        Author author = authorRepository.save(new Author("오키더키"));
+        author.setBookcloudpubAccount(savedUser);
 
         //when
-        User testUser = userRepository.findOne(savedUser.getId());
+        User testUser = userRepository.findOne(savedUser.getEmail());
 
         //then
         assertEquals(savedUser, testUser);
@@ -102,7 +102,7 @@ public class UserRepositoryTest {
         userRepository.save(user);
 
         //when
-        User found = userRepository.findByEmail(user.getEmail());
+        User found = userRepository.findOne(user.getEmail());
 
         //then
         assertEquals(user, found);
@@ -118,7 +118,7 @@ public class UserRepositoryTest {
         userRepository.save(user);
 
         //when
-        User savedUser = userRepository.findByEmail(user.getEmail());
+        User savedUser = userRepository.findOne(user.getEmail());
 
         //then
         assertEquals(encPassword, savedUser.getPassword());

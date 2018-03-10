@@ -17,6 +17,7 @@ public class Book {
     @Column(columnDefinition = "char(18) unique")
     private String isbn;
 
+    @Column(columnDefinition = "char(255) not null")
     private String title;
 
     @ManyToMany(

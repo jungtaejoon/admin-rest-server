@@ -66,7 +66,8 @@ public class AdminRestServerApplication {
 		@Override
 		protected void configure(HttpSecurity http) throws Exception {
 			http
-					.authorizeRequests().anyRequest().authenticated()
+					.authorizeRequests()
+						.anyRequest().authenticated()
 					.and()
 					.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.NEVER)
 			;

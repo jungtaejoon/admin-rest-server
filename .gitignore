@@ -3,6 +3,7 @@ out/
 gradle/
 gradlew
 gradlew.bat
+.sql
 
 .gradle
 /build/
